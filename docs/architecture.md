@@ -1,8 +1,8 @@
-# Arquitectura en Profundidad
+# Architecture Deep Dive
 
-Este documento proporciona un recorrido detallado de la arquitectura del sistema Champions Loan Expert.
+This document provides a detailed walkthrough of the Champions Loan Expert system architecture.
 
-## Visión General del Sistema
+## System Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -13,7 +13,7 @@ Este documento proporciona un recorrido detallado de la arquitectura del sistema
 │   │                    Cloud Run: Frontend (Next.js 14)                     │   │
 │   │                  champions-frontend-561975502517                        │   │
 │   │                                                                         │   │
-│   │   Navegador ──► Assets Estáticos ──► App React ──► Llamadas API         │   │
+│   │   Browser ──► Static Assets ──► React App ──► API Calls                 │   │
 │   │                                                                         │   │
 │   └───────────────────────────────────┬─────────────────────────────────────┘   │
 │                                       │                                         │
@@ -23,7 +23,7 @@ Este documento proporciona un recorrido detallado de la arquitectura del sistema
 │   │                    Cloud Run: Backend (FastAPI)                         │   │
 │   │                   champions-backend-561975502517                        │   │
 │   │                                                                         │   │
-│   │   Router API ──► Servicios ──► Base de Datos ──► APIs Externas          │   │
+│   │   API Router ──► Services ──► Database ──► External APIs                │   │
 │   │                                                                         │   │
 │   └───────────────────────────────────┬─────────────────────────────────────┘   │
 │                                       │                                         │
@@ -33,116 +33,116 @@ Este documento proporciona un recorrido detallado de la arquitectura del sistema
                     │                   │                   │
                     ▼                   ▼                   ▼
             ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-            │  Cloud SQL    │   │ Gemini 2.0    │   │    Secret     │
+            │  Cloud SQL    │   │ Gemini 3      │   │    Secret     │
             │  PostgreSQL   │   │ File Search   │   │    Manager    │
             └───────────────┘   └───────────────┘   └───────────────┘
 ```
 
 ---
 
-## Arquitectura del Frontend
+## Frontend Architecture
 
-### Stack Tecnológico
+### Technology Stack
 - **Framework:** Next.js 14 (App Router)
-- **Lenguaje:** TypeScript
-- **Estilos:** Tailwind CSS
-- **Estado:** Zustand (chat, auth, theme, notifications)
-- **Íconos:** Lucide React
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **State:** Zustand (chat, auth, theme, notifications)
+- **Icons:** Lucide React
 - **Markdown:** react-markdown + remark-gfm
 
-### Estructura Completa de Archivos
+### Complete File Structure
 
 ```
 frontend/src/
 ├── app/                           # Next.js App Router
-│   ├── layout.tsx                 # Layout raíz (providers, fuentes)
-│   ├── page.tsx                   # Landing → redirige a /chat
+│   ├── layout.tsx                 # Root layout (providers, fonts)
+│   ├── page.tsx                   # Landing → redirects to /chat
 │   ├── chat/
-│   │   └── page.tsx               # Interfaz principal de chat
+│   │   └── page.tsx               # Main chat interface
 │   ├── admin/
-│   │   └── page.tsx               # Panel admin (5 pestañas)
+│   │   └── page.tsx               # Admin panel (5 tabs)
 │   └── settings/
-│       └── page.tsx               # Preferencias de usuario
+│       └── page.tsx               # User preferences
 │
 ├── components/
 │   ├── auth/
-│   │   ├── LoginForm.tsx          # Formulario email/contraseña
+│   │   ├── LoginForm.tsx          # Email/password form
 │   │   └── index.ts
 │   │
 │   ├── chat/
-│   │   ├── ChatLayout.tsx         # Layout principal (sidebar + chat)
-│   │   ├── ChatInput.tsx          # Input de mensaje con enviar
-│   │   ├── MessageList.tsx        # Mensajes con citas inline
-│   │   ├── Sidebar.tsx            # Lista de conversaciones + header
-│   │   ├── SourcesPanel.tsx       # Sidebar de citas
+│   │   ├── ChatLayout.tsx         # Main layout (sidebar + chat)
+│   │   ├── ChatInput.tsx          # Message input with send
+│   │   ├── MessageList.tsx        # Messages with inline citations
+│   │   ├── Sidebar.tsx            # Conversation list + header
+│   │   ├── SourcesPanel.tsx       # Citations sidebar
 │   │   └── index.ts
 │   │
 │   ├── providers/
-│   │   ├── ThemeProvider.tsx      # Contexto de modo oscuro
-│   │   └── ChunkErrorHandler.tsx  # Error boundary de Next.js
+│   │   ├── ThemeProvider.tsx      # Dark mode context
+│   │   └── ChunkErrorHandler.tsx  # Next.js error boundary
 │   │
 │   └── ui/
-│       ├── Button.tsx             # Botón reutilizable
-│       ├── Input.tsx              # Input reutilizable
-│       ├── Toast.tsx              # Notificaciones toast
+│       ├── Button.tsx             # Reusable button
+│       ├── Input.tsx              # Reusable input
+│       ├── Toast.tsx              # Toast notifications
 │       └── index.ts
 │
 ├── hooks/
-│   └── useTranslation.ts          # Hook de i18n
+│   └── useTranslation.ts          # i18n hook
 │
 ├── lib/
-│   ├── api.ts                     # Cliente API (authApi, chatApi, adminApi)
-│   ├── i18n.ts                    # Strings de traducción (es/en)
-│   └── utils.ts                   # cn() mezclador de clases
+│   ├── api.ts                     # API client (authApi, chatApi, adminApi)
+│   ├── i18n.ts                    # Translation strings (es/en)
+│   └── utils.ts                   # cn() class merger
 │
 ├── store/
-│   ├── auth.ts                    # Estado auth (usuario, token, login/logout)
-│   ├── chat.ts                    # Estado chat (mensajes, streaming, citas)
-│   └── notifications.ts           # Notificaciones toast
+│   ├── auth.ts                    # Auth state (user, token, login/logout)
+│   ├── chat.ts                    # Chat state (messages, streaming, citations)
+│   └── notifications.ts           # Toast notifications
 │
 └── types/
-    └── index.ts                   # Interfaces TypeScript
+    └── index.ts                   # TypeScript interfaces
 ```
 
-### Detalle de Componentes de Página
+### Page Component Details
 
-| Página | Ruta | Características |
+| Page | Route | Features |
 |------|-------|----------|
-| **Chat** | `/chat` | Lista de mensajes, input, panel de citas, sidebar de conversaciones |
-| **Admin** | `/admin` | 5 pestañas: Analytics, Logs, Usuarios, Conversaciones, Documentos |
-| **Settings** | `/settings` | Toggle de tema, selector de idioma |
+| **Chat** | `/chat` | Message list, input, sources panel, conversation sidebar |
+| **Admin** | `/admin` | 5 tabs: Analytics, Logs, Users, Conversations, Documents |
+| **Settings** | `/settings` | Theme toggle, language selector |
 
-### Componentes Principales
+### Key Components
 
-| Componente | Archivo | Propósito |
+| Component | File | Purpose |
 |-----------|------|---------|
-| `ChatLayout` | `components/chat/ChatLayout.tsx` | Layout grid: sidebar + main + sources |
-| `MessageList` | `components/chat/MessageList.tsx` | Renderiza mensajes con markdown, citas inline, botones de feedback |
-| `ChatInput` | `components/chat/ChatInput.tsx` | Textarea con botón enviar, Enter para enviar |
-| `Sidebar` | `components/chat/Sidebar.tsx` | Lista de conversaciones, nuevo chat, enlace a settings |
-| `SourcesPanel` | `components/chat/SourcesPanel.tsx` | Panel de citas colapsable, números de página |
-| `LoginForm` | `components/auth/LoginForm.tsx` | Email + contraseña, manejo de errores |
-| `Toast` | `components/ui/Toast.tsx` | Notificaciones success/error/warning |
-| `ThemeProvider` | `components/providers/ThemeProvider.tsx` | Contexto de modo oscuro con detección de sistema |
+| `ChatLayout` | `components/chat/ChatLayout.tsx` | Grid layout: sidebar + main + sources |
+| `MessageList` | `components/chat/MessageList.tsx` | Renders messages with markdown, inline citations, feedback buttons |
+| `ChatInput` | `components/chat/ChatInput.tsx` | Textarea with send button, Enter to submit |
+| `Sidebar` | `components/chat/Sidebar.tsx` | Conversation list, new chat, settings link |
+| `SourcesPanel` | `components/chat/SourcesPanel.tsx` | Collapsible citations panel, page numbers |
+| `LoginForm` | `components/auth/LoginForm.tsx` | Email + password, error handling |
+| `Toast` | `components/ui/Toast.tsx` | Success/error/warning notifications |
+| `ThemeProvider` | `components/providers/ThemeProvider.tsx` | Dark mode context with system detection |
 
-### Gestión de Estado (Stores Zustand)
+### State Management (Zustand Stores)
 
 ```typescript
-// Auth Store - Estado de autenticación
+// Auth Store - Authentication state
 interface AuthStore {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
 
-  // Acciones
+  // Actions
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   checkAuth: () => Promise<boolean>;
 }
 
-// Chat Store - Estado principal para funcionalidad de chat
+// Chat Store - Main state for chat functionality
 interface ChatStore {
-  // Conversación
+  // Conversation
   conversationId: string | null;
   messages: Message[];
   citations: Citation[];
@@ -153,15 +153,15 @@ interface ChatStore {
   streamingContent: string;
   toolStatus: string | null;
 
-  // Citas Inline (para marcadores persistentes)
+  // Inline Citations (for persistent markers)
   inlineCitations: InlineCitation[];
   inlineCitationsMessageId: string | null;
 
-  // Estado UI
+  // UI State
   highlightedCitation: number | null;
   isLoadingMessages: boolean;
 
-  // Acciones
+  // Actions
   sendMessage: (message: string) => Promise<void>;
   loadConversation: (id: string) => Promise<void>;
   loadConversations: () => Promise<void>;
@@ -170,17 +170,17 @@ interface ChatStore {
   highlightCitation: (index: number) => void;
 }
 
-// Notification Store - Notificaciones toast
+// Notification Store - Toast notifications
 interface NotificationStore {
   notifications: Notification[];
 
-  // Acciones
+  // Actions
   addNotification: (type: 'success' | 'error' | 'warning' | 'info', message: string) => void;
   removeNotification: (id: string) => void;
 }
 ```
 
-### Estructura del Cliente API
+### API Client Structure
 
 ```typescript
 // lib/api.ts
@@ -215,10 +215,10 @@ export const adminApi = {
 };
 ```
 
-### Procesamiento de Stream SSE
+### SSE Stream Processing
 
 ```typescript
-// En chat store - acción sendMessage
+// In chat store - sendMessage action
 const response = await fetch('/api/chat', { method: 'POST', body: JSON.stringify(request) });
 const reader = response.body.getReader();
 
@@ -238,7 +238,7 @@ while (true) {
           set({ conversationId: event.conversation_id });
           break;
         case 'tool_use':
-          set({ toolStatus: event.status === 'start' ? 'Buscando documentos...' : null });
+          set({ toolStatus: event.status === 'start' ? 'Searching documents...' : null });
           break;
         case 'delta':
           set(state => ({ streamingContent: state.streamingContent + event.content }));
@@ -251,7 +251,7 @@ while (true) {
           });
           break;
         case 'done':
-          // Finalizar mensaje y agregar al array de mensajes
+          // Finalize message and add to messages array
           break;
         case 'error':
           notify.error(event.message);
@@ -264,101 +264,101 @@ while (true) {
 
 ---
 
-## Arquitectura del Backend
+## Backend Architecture
 
-### Stack Tecnológico
+### Technology Stack
 - **Framework:** FastAPI (Python 3.11)
 - **ORM:** SQLAlchemy (async)
-- **Validación:** Pydantic v2
-- **IA:** SDK google-genai
+- **Validation:** Pydantic v2
+- **AI:** google-genai SDK
 
-### Estructura de Módulos
+### Module Structure
 
 ```
 backend/app/
-├── main.py              # Entrada de aplicación FastAPI
-├── config.py            # Configuración de entorno
+├── main.py              # FastAPI application entry
+├── config.py            # Environment configuration
 │
-├── api/                 # Endpoints REST
-│   ├── auth.py          # Endpoints /api/auth/*
+├── api/                 # REST endpoints
+│   ├── auth.py          # /api/auth/* endpoints
 │   ├── chat.py          # /api/chat, /api/suggestions
 │   ├── conversations.py # /api/conversations/*
 │   ├── admin.py         # /api/admin/*
-│   └── deps.py          # Inyección de dependencias
+│   └── deps.py          # Dependency injection
 │
 ├── models/
-│   ├── database.py      # Modelos ORM SQLAlchemy
-│   ├── schemas.py       # Request/response Pydantic
-│   └── errors.py        # Códigos de error y clasificación
+│   ├── database.py      # SQLAlchemy ORM models
+│   ├── schemas.py       # Pydantic request/response
+│   └── errors.py        # Error codes and classification
 │
 ├── services/
 │   ├── chat_service.py        # Gemini + File Search RAG
-│   ├── conversation_service.py # Operaciones CRUD
-│   └── auth_service.py        # Manejo de JWT
+│   ├── conversation_service.py # CRUD operations
+│   └── auth_service.py        # JWT handling
 │
 └── db/
-    └── connection.py    # Gestión de sesión de BD
+    └── connection.py    # Database session management
 ```
 
-### Flujo de Request
+### Request Flow
 
 ```
-Request de Usuario
+User Request
      │
      ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  Capa API (FastAPI Router)                                                   │
+│  API Layer (FastAPI Router)                                                  │
 │  ─────────────────────────────────────────────────────────────────────────── │
 │                                                                              │
-│  1. Recibir HTTP Request                                                     │
-│  2. Validar con schema Pydantic                                              │
-│  3. Verificar autenticación JWT                                              │
-│  4. Enrutar al endpoint apropiado                                            │
+│  1. Receive HTTP Request                                                     │
+│  2. Validate with Pydantic schema                                            │
+│  3. Check JWT authentication                                                 │
+│  4. Route to appropriate endpoint                                            │
 │                                                                              │
 └────────────────────────────────────┬────────────────────────────────────────┘
                                      │
                                      ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  Capa de Servicio                                                            │
+│  Service Layer                                                               │
 │  ─────────────────────────────────────────────────────────────────────────── │
 │                                                                              │
 │  ChatService:                                                                │
-│    • Construir contexto de conversación                                      │
-│    • Detectar programa de préstamo del mensaje                               │
-│    • Llamar a Gemini con File Search                                         │
-│    • Extraer citas de grounding_metadata                                     │
-│    • Transmitir respuesta vía SSE                                            │
+│    • Build conversation context                                              │
+│    • Detect loan program from message                                        │
+│    • Call Gemini with File Search                                            │
+│    • Extract citations from grounding_metadata                               │
+│    • Stream response via SSE                                                 │
 │                                                                              │
 │  ConversationService:                                                        │
-│    • Operaciones CRUD para conversaciones                                    │
-│    • Gestión de mensajes                                                     │
-│    • Almacenamiento de citas                                                 │
+│    • CRUD operations for conversations                                       │
+│    • Message management                                                      │
+│    • Citation storage                                                        │
 │                                                                              │
 └────────────────────────────────────┬────────────────────────────────────────┘
                                      │
                                      ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  Capa de Datos                                                               │
+│  Data Layer                                                                  │
 │  ─────────────────────────────────────────────────────────────────────────── │
 │                                                                              │
 │  PostgreSQL (Cloud SQL):                                                     │
-│    • users          - Cuentas de usuario                                     │
-│    • conversations  - Sesiones de chat                                       │
-│    • messages       - Mensajes individuales                                  │
-│    • citations      - Referencias a fuentes                                  │
-│    • run_logs       - Datos de analytics                                     │
-│    • feedback       - Valoraciones de usuarios                               │
+│    • users          - User accounts                                          │
+│    • conversations  - Chat sessions                                          │
+│    • messages       - Individual messages                                    │
+│    • citations      - Source references                                      │
+│    • run_logs       - Analytics data                                         │
+│    • feedback       - User ratings                                           │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Esquema de Base de Datos
+## Database Schema
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           ESQUEMA DE BASE DE DATOS                           │
+│                           DATABASE SCHEMA                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  ┌─────────────┐       ┌─────────────────┐       ┌─────────────────┐        │
@@ -395,37 +395,37 @@ Request de Usuario
 
 ---
 
-## Manejo de Errores
+## Error Handling
 
-### Clasificación de Códigos de Error
+### Error Code Classification
 
 ```python
 class ErrorCode(str, Enum):
-    # Errores de configuración
+    # Configuration errors
     NO_FILE_SEARCH_STORE = "NO_FILE_SEARCH_STORE"
     MODEL_NOT_FOUND = "MODEL_NOT_FOUND"
 
-    # Límite de tasa
+    # Rate limiting
     RATE_LIMIT_EXCEEDED = "RATE_LIMIT_EXCEEDED"
     QUOTA_EXCEEDED = "QUOTA_EXCEEDED"
 
-    # Errores de servicio
+    # Service errors
     SERVICE_UNAVAILABLE = "SERVICE_UNAVAILABLE"
     CONNECTION_ERROR = "CONNECTION_ERROR"
     TIMEOUT = "TIMEOUT"
 
-    # Errores de respuesta
+    # Response errors
     NO_RESPONSE = "NO_RESPONSE"
     NO_CITATIONS = "NO_CITATIONS"
     INVALID_RESPONSE = "INVALID_RESPONSE"
     CONTENT_BLOCKED = "CONTENT_BLOCKED"
 
-    # Genérico
+    # Generic
     CHAT_FAILED = "CHAT_FAILED"
 ```
 
-Todos los errores son:
-1. Clasificados por `classify_gemini_error()`
-2. Registrados con código específico
-3. Rastreados en tabla `run_logs`
-4. Retornados al cliente con mensaje amigable
+All errors are:
+1. Classified by `classify_gemini_error()`
+2. Logged with specific code
+3. Tracked in `run_logs` table
+4. Returned to client with friendly message

@@ -1,95 +1,95 @@
-# Referencia de Configuración
+# Configuration Reference
 
-Todas las variables de entorno y valores de configuración para Champions Loan Expert.
+All environment variables and configuration values for Champions Loan Expert.
 
-## Variables de Entorno
+## Environment Variables
 
-### Backend (Requeridas)
+### Backend (Required)
 
-| Variable | Descripción | Ejemplo |
+| Variable | Description | Example |
 |----------|-------------|---------|
-| `DATABASE_URL` | Cadena de conexión PostgreSQL | `postgresql://user:pass@host:5432/db` |
-| `JWT_SECRET` | Clave de firma JWT (mín 32 chars) | `tu-clave-super-secreta-aqui-32chars` |
-| `SHARED_PASSWORD` | Contraseña compartida del equipo | `contraseña_segura` |
-| `GOOGLE_API_KEY` | Clave API de Gemini | `AIza...` |
-| `GEMINI_FILE_SEARCH_STORE` | ID del File Search Store | `stores/abc123...` |
+| `DATABASE_URL` | PostgreSQL connection string | `postgresql://user:pass@host:5432/db` |
+| `JWT_SECRET` | JWT signing key (min 32 chars) | `your-super-secret-key-here-32chars` |
+| `SHARED_PASSWORD` | Team shared password | `secure_password` |
+| `GOOGLE_API_KEY` | Gemini API key | `AIza...` |
+| `GEMINI_FILE_SEARCH_STORE` | File Search Store ID | `stores/abc123...` |
 
-### Backend (Opcionales)
+### Backend (Optional)
 
-| Variable | Descripción | Default |
+| Variable | Description | Default |
 |----------|-------------|---------|
-| `GEMINI_MODEL` | Nombre del modelo | `gemini-2.0-flash` |
-| `LOG_LEVEL` | Nivel de logging | `INFO` |
-| `CORS_ORIGINS` | Orígenes permitidos (separados por coma) | `*` |
+| `GEMINI_MODEL` | Model name | `gemini-3-flash` |
+| `LOG_LEVEL` | Logging level | `INFO` |
+| `CORS_ORIGINS` | Allowed origins (comma-separated) | `*` |
 
 ### Frontend
 
-| Variable | Descripción | Ejemplo |
+| Variable | Description | Example |
 |----------|-------------|---------|
-| `NEXT_PUBLIC_API_URL` | URL del API Backend | `https://champions-backend-xxx.run.app` |
+| `NEXT_PUBLIC_API_URL` | Backend API URL | `https://champions-backend-xxx.run.app` |
 
 ---
 
 ## .env.example
 
 ```bash
-# Configuración Backend
+# Backend Configuration
 DATABASE_URL=postgresql+asyncpg://postgres:password@localhost:5432/loan_expert
-JWT_SECRET=tu-clave-jwt-super-secreta-al-menos-32-caracteres
+JWT_SECRET=your-jwt-secret-key-at-least-32-characters
 SHARED_PASSWORD=champions2024
 
-# Configuración Gemini
+# Gemini Configuration
 GOOGLE_API_KEY=AIzaSy...
-GEMINI_MODEL=gemini-2.0-flash
+GEMINI_MODEL=gemini-3-flash
 GEMINI_FILE_SEARCH_STORE=stores/abc123def456
 
-# Frontend (para producción)
+# Frontend (for production)
 NEXT_PUBLIC_API_URL=https://champions-backend-561975502517.us-central1.run.app
 ```
 
 ---
 
-## Recursos de Google Cloud
+## Google Cloud Resources
 
-### Servicios Cloud Run
+### Cloud Run Services
 
-| Servicio | URL | Región |
-|----------|-----|--------|
+| Service | URL | Region |
+|---------|-----|--------|
 | Frontend | `champions-frontend-561975502517.us-central1.run.app` | us-central1 |
 | Backend | `champions-backend-561975502517.us-central1.run.app` | us-central1 |
 
 ### Cloud SQL
 
-| Propiedad | Valor |
-|-----------|-------|
-| Instancia | PostgreSQL 14 |
-| Región | us-central1 |
-| Conexión | Via Cloud SQL Proxy o IP privada |
+| Property | Value |
+|----------|-------|
+| Instance | PostgreSQL 14 |
+| Region | us-central1 |
+| Connection | Via Cloud SQL Proxy or private IP |
 
 ### Secret Manager
 
-| Secreto | Propósito |
-|---------|-----------|
-| `jwt-secret` | Clave de firma JWT |
-| `google-api-key` | Clave API de Gemini |
-| `db-password` | Contraseña de base de datos |
-| `shared-password` | Autenticación de usuarios |
+| Secret | Purpose |
+|--------|---------|
+| `jwt-secret` | JWT signing key |
+| `google-api-key` | Gemini API key |
+| `db-password` | Database password |
+| `shared-password` | User authentication |
 
 ### Gemini File Search Store
 
-| Propiedad | Valor |
-|-----------|-------|
+| Property | Value |
+|----------|-------|
 | Store ID | `stores/...` |
-| Modelo | `gemini-2.0-flash` |
-| Documentos | 16 documentos de préstamos indexados |
+| Model | `gemini-3-flash` |
+| Documents | 16 indexed loan documents |
 
 ---
 
-## Mapa de Nombres de File Search
+## File Search Name Map
 
-El `file_search_name_map.json` mapea IDs de archivos de Gemini a nombres legibles.
+The `file_search_name_map.json` maps Gemini file IDs to readable names.
 
-**Ubicación:** `backend/file_search_name_map.json`
+**Location:** `backend/file_search_name_map.json`
 
 ```json
 {
@@ -114,9 +114,9 @@ El `file_search_name_map.json` mapea IDs de archivos de Gemini a nombres legible
 
 ---
 
-## Patrones de Detección de Programas
+## Program Detection Patterns
 
-El sistema auto-detecta programas de préstamos de los mensajes del usuario.
+The system auto-detects loan programs from user messages.
 
 ```python
 PROGRAM_PATTERNS = {
@@ -124,13 +124,13 @@ PROGRAM_PATTERNS = {
         "patterns": [r"\bfull\s*doc\b", r"\bfull\s+documentation\b"],
         "name": "Full Doc Accelerator",
         "matrix": "Accelerator-Activator Full Doc Matrix",
-        "asset_formula": "60 meses",
+        "asset_formula": "60 months",
     },
     "alt_doc": {
         "patterns": [r"\balt\s*doc\b", r"\balternative\s+doc\b"],
         "name": "Alt Doc Activator",
         "matrix": "Accelerator-Activator Alt Doc Matrix",
-        "asset_formula": "60 meses",
+        "asset_formula": "60 months",
     },
     "dscr": {
         "patterns": [r"\bdscr\b", r"\bdebt\s+service\s+coverage\b"],
@@ -141,7 +141,7 @@ PROGRAM_PATTERNS = {
         "patterns": [r"\bsuper\s*jumbo\b", r"\bjumbo\b"],
         "name": "Super Jumbo",
         "matrix": "Super Jumbo Matrix",
-        "asset_formula": "84 meses",
+        "asset_formula": "84 months",
     },
     "ally": {
         "patterns": [r"\bally\b", r"\bno\s+ratio\b"],
@@ -163,30 +163,30 @@ PROGRAM_PATTERNS = {
 
 ---
 
-## Documentos Indexados
+## Indexed Documents
 
-| Documento | Programa | Tipo |
-|-----------|----------|------|
-| `Accelerator-Activator_Alt_Doc_Matrix.md` | Alt Doc | Matriz |
-| `Accelerator-Activator_Full_Doc_Matrix.md` | Full Doc | Matriz |
-| `Accelerator_DSCR_1-4_Units_Matrix.md` | DSCR | Matriz |
-| `Accelerator_DSCR_5-8_Units_Matrix.md` | DSCR | Matriz |
-| `Ally_Consumer_No_Ratio_Matrix.md` | Ally | Matriz |
-| `CF_Underwriting-Guidelines.md` | General | Guías |
-| `CF_Underwriting-Guidelines_Ally.md` | Ally | Guías |
-| `CF_Underwriting-Guidelines_Super_Jumbo.md` | Super Jumbo | Guías |
-| `Champions-Funding_Non-QM-Wholesale_Product-Catalog.md` | Todos | Catálogo |
-| `Foreign-National-Ambassador_DSCR_Matrix.md` | Foreign National | Matriz |
-| `Foreign-National-Ambassador_Full-Alt-Doc_Matrix.md` | Foreign National | Matriz |
-| `ITIN_Accelerator_DSCR_Matrix.md` | ITIN | Matriz |
-| `ITIN_Accelerator_Full-Alt_Matrix.md` | ITIN | Matriz |
-| `State-Licensing-Survey.md` | General | Referencia |
-| `Super-Jumbo_Matrix.md` | Super Jumbo | Matriz |
-| `super-jumbo-guidelines-extracted.md` | Super Jumbo | Guías |
+| Document | Program | Type |
+|----------|---------|------|
+| `Accelerator-Activator_Alt_Doc_Matrix.md` | Alt Doc | Matrix |
+| `Accelerator-Activator_Full_Doc_Matrix.md` | Full Doc | Matrix |
+| `Accelerator_DSCR_1-4_Units_Matrix.md` | DSCR | Matrix |
+| `Accelerator_DSCR_5-8_Units_Matrix.md` | DSCR | Matrix |
+| `Ally_Consumer_No_Ratio_Matrix.md` | Ally | Matrix |
+| `CF_Underwriting-Guidelines.md` | General | Guidelines |
+| `CF_Underwriting-Guidelines_Ally.md` | Ally | Guidelines |
+| `CF_Underwriting-Guidelines_Super_Jumbo.md` | Super Jumbo | Guidelines |
+| `Champions-Funding_Non-QM-Wholesale_Product-Catalog.md` | All | Catalog |
+| `Foreign-National-Ambassador_DSCR_Matrix.md` | Foreign National | Matrix |
+| `Foreign-National-Ambassador_Full-Alt-Doc_Matrix.md` | Foreign National | Matrix |
+| `ITIN_Accelerator_DSCR_Matrix.md` | ITIN | Matrix |
+| `ITIN_Accelerator_Full-Alt_Matrix.md` | ITIN | Matrix |
+| `State-Licensing-Survey.md` | General | Reference |
+| `Super-Jumbo_Matrix.md` | Super Jumbo | Matrix |
+| `super-jumbo-guidelines-extracted.md` | Super Jumbo | Guidelines |
 
 ---
 
-## Configuración Docker
+## Docker Configuration
 
 ### docker-compose.yml
 
@@ -197,7 +197,7 @@ services:
   backend:
     build: ./backend
     ports:
-      - "8080:8080"
+      - "8082:8080"
     environment:
       - DATABASE_URL=postgresql+asyncpg://postgres:password@db:5432/loan_expert
       - JWT_SECRET=${JWT_SECRET}
@@ -210,9 +210,9 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"
+      - "3002:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - NEXT_PUBLIC_API_URL=http://localhost:8082
 
   db:
     image: postgres:14
@@ -228,55 +228,55 @@ volumes:
 
 ---
 
-## Configuración de Caché
+## Cache Configuration
 
-### Caché de Respuestas
+### Response Cache
 
 ```python
-# Caché en memoria para consultas idénticas
-CACHE_TTL = 3600  # 1 hora
+# In-memory cache for identical queries
+CACHE_TTL = 3600  # 1 hour
 
-# La clave de caché incluye programa para evitar contaminación cruzada
+# Cache key includes program to avoid cross-contamination
 def _get_cache_key(message: str, program_key: str | None) -> str:
     cache_input = f"{program_key or 'general'}:{message.lower().strip()}"
     return hashlib.md5(cache_input.encode()).hexdigest()
 ```
 
-### Caché de Sugerencias Frontend
+### Frontend Suggestions Cache
 
 ```typescript
-// SessionStorage con TTL de 5 minutos
+// SessionStorage with 5-minute TTL
 const cached = sessionStorage.getItem('chat_suggestions');
 const cacheAge = Date.now() - (parsed.timestamp || 0);
-if (cacheAge < 300000) {  // 5 minutos
+if (cacheAge < 300000) {  // 5 minutes
   return cached.suggestions;
 }
 ```
 
 ---
 
-## Configuración de Seguridad
+## Security Configuration
 
-### Ajustes CORS
+### CORS Settings
 
 ```python
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configurar para producción
+    allow_origins=["*"],  # Configure for production
     allow_credentials=True,
     allow_methods=["GET", "POST", "PATCH", "DELETE"],
     allow_headers=["*"],
 )
 ```
 
-### Configuración JWT
+### JWT Configuration
 
 ```python
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRY_DAYS = 30
 ```
 
-### Hash de Contraseñas
+### Password Hashing
 
 ```python
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

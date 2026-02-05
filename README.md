@@ -1,68 +1,68 @@
 <p align="center">
   <img src="https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
   <img src="https://img.shields.io/badge/Next.js-Frontend-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js">
-  <img src="https://img.shields.io/badge/Gemini_2.0-IA-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Gemini">
-  <img src="https://img.shields.io/badge/Google_Cloud-Hospedado-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white" alt="GCP">
+  <img src="https://img.shields.io/badge/Gemini_3-AI-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Gemini">
+  <img src="https://img.shields.io/badge/Google_Cloud-Hosted-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white" alt="GCP">
 </p>
 
 <h1 align="center">Champions Loan Expert</h1>
 
 <p align="center">
-  <strong>Asistente impulsado por IA para los programas hipotecarios non-QM mayoristas de Champions Funding</strong>
+  <strong>AI-powered assistant for Champions Funding's wholesale non-QM mortgage programs</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Backend-v2.5.0-blue?style=flat-square" alt="Versión Backend">
-  <img src="https://img.shields.io/badge/Frontend-v2.5.0-blue?style=flat-square" alt="Versión Frontend">
-  <img src="https://img.shields.io/badge/Estado-Producción-success?style=flat-square" alt="Estado">
-  <img src="https://img.shields.io/badge/Licencia-Propietaria-red?style=flat-square" alt="Licencia">
+  <img src="https://img.shields.io/badge/Backend-v2.5.1-blue?style=flat-square" alt="Backend Version">
+  <img src="https://img.shields.io/badge/Frontend-v2.5.1-blue?style=flat-square" alt="Frontend Version">
+  <img src="https://img.shields.io/badge/Status-Production-success?style=flat-square" alt="Status">
+  <img src="https://img.shields.io/badge/License-Proprietary-red?style=flat-square" alt="License">
 </p>
 
 ---
 
-## 🚀 Inicio Rápido
+## Quick Start
 
 <table>
 <tr>
 <td width="120" align="center">
-<b>Paso 1</b><br>
-<sub>Abrir App</sub>
+<b>Step 1</b><br>
+<sub>Open App</sub>
 </td>
 <td width="120" align="center">
-<b>Paso 2</b><br>
-<sub>Iniciar Sesión</sub>
+<b>Step 2</b><br>
+<sub>Log In</sub>
 </td>
 <td width="120" align="center">
-<b>Paso 3</b><br>
-<sub>Hacer Pregunta</sub>
+<b>Step 3</b><br>
+<sub>Ask Question</sub>
 </td>
 <td width="120" align="center">
-<b>Paso 4</b><br>
-<sub>Obtener Respuesta</sub>
+<b>Step 4</b><br>
+<sub>Get Answer</sub>
 </td>
 <td width="120" align="center">
-<b>Paso 5</b><br>
-<sub>Ver Citas</sub>
+<b>Step 5</b><br>
+<sub>View Citations</sub>
 </td>
 </tr>
 <tr>
-<td align="center">🌐</td>
-<td align="center">🔐</td>
-<td align="center">💬</td>
-<td align="center">🤖</td>
-<td align="center">📄</td>
+<td align="center">Open the app URL</td>
+<td align="center">Use @championsfunding.com email</td>
+<td align="center">Type your loan question</td>
+<td align="center">AI responds with sources</td>
+<td align="center">Click citation markers</td>
 </tr>
 </table>
 
-### 🔗 Enlaces de Producción
+### Production Links
 ```
-Aplicación: https://champions-frontend-561975502517.us-central1.run.app
-Docs API:   https://champions-backend-561975502517.us-central1.run.app/docs
+Application: https://champions-frontend-561975502517.us-central1.run.app
+API Docs:    https://champions-backend-561975502517.us-central1.run.app/docs
 ```
 
 ---
 
-## 🏗️ Arquitectura
+## Architecture Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -73,7 +73,7 @@ Docs API:   https://champions-backend-561975502517.us-central1.run.app/docs
 │   │                         FRONTEND (Next.js 14)                           │   │
 │   │                      champions-frontend-561975502517                    │   │
 │   │                                                                         │   │
-│   │   Chat UI ──► Conversaciones ──► Ajustes ──► Panel Admin                │   │
+│   │   Chat UI ──► Conversations ──► Settings ──► Admin Panel                │   │
 │   │                                                                         │   │
 │   └───────────────────────────────────┬─────────────────────────────────────┘   │
 │                                       │                                         │
@@ -93,60 +93,65 @@ Docs API:   https://champions-backend-561975502517.us-central1.run.app/docs
                     │                   │                   │
                     ▼                   ▼                   ▼
             ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-            │  Cloud SQL    │   │ Gemini 2.0    │   │    Secret     │
+            │  Cloud SQL    │   │ Gemini 3      │   │    Secret     │
             │  PostgreSQL   │   │ File Search   │   │    Manager    │
             │               │   │               │   │               │
-            │ • Usuarios    │   │ • Motor RAG   │   │ • JWT Secret  │
-            │ • Mensajes    │   │ • 16 Docs     │   │ • API Keys    │
-            │ • Citas       │   │   Indexados   │   │ • DB Creds    │
+            │ • Users       │   │ • RAG Engine  │   │ • JWT Secret  │
+            │ • Messages    │   │ • 16 Docs     │   │ • API Keys    │
+            │ • Citations   │   │   Indexed     │   │ • DB Creds    │
             └───────────────┘   └───────────────┘   └───────────────┘
 ```
 
-### Cómo Funciona
+### How It Works
 
-| Paso | Componente | Acción |
-|:----:|:-----------|:-------|
-| 1 | Usuario | Hace pregunta sobre programas de préstamo |
-| 2 | Backend | Envía consulta a Gemini con File Search RAG |
-| 3 | Gemini | Busca en 16 documentos indexados por contexto |
-| 4 | Backend | Transmite respuesta vía SSE con citas |
-| 5 | Frontend | Renderiza respuesta con marcadores de cita clicables |
+| Step | Component | Action |
+|:----:|:----------|:-------|
+| 1 | User | Asks question about loan programs |
+| 2 | Backend | Sends query to Gemini with File Search RAG |
+| 3 | Gemini | Searches 16 indexed documents for context |
+| 4 | Backend | Streams response via SSE with citations |
+| 5 | Frontend | Renders response with clickable citation markers |
 
 ---
 
-## 📚 Documentación
+## Documentation
 
-| Documento | Descripción |
+| Document | Description |
 |:---------|:------------|
-| 📖 [Arquitectura](./docs/arquitectura.md) | Diseño del sistema y flujo de datos |
-| 🔑 [Referencia API](./docs/referencia-api.md) | Documentación de endpoints REST |
-| 📁 [Sistema de Enrutamiento de Archivos](./docs/sistema-enrutamiento-archivos.md) | Resolución de IDs de documentos |
-| ⚙️ [Configuración](./docs/configuracion.md) | Variables de entorno y ajustes |
-| 🔧 [Solución de Problemas](./docs/solucion-problemas.md) | Problemas comunes y soluciones |
-| 🗺️ [Hoja de Ruta](./HOJA-DE-RUTA.md) | Funcionalidades pendientes y mejoras |
+| [Architecture](./docs/architecture.md) | System design and data flow |
+| [Frontend](./docs/frontend.md) | React components and state management |
+| [Backend](./docs/backend.md) | FastAPI services and endpoints |
+| [Database](./docs/database.md) | PostgreSQL schema and relationships |
+| [API Reference](./docs/api-reference.md) | REST endpoint documentation |
+| [File Routing System](./docs/file-routing-system.md) | Document ID resolution |
+| [Configuration](./docs/configuration.md) | Environment variables and settings |
+| [Development](./docs/development.md) | Local setup instructions |
+| [Deployment](./docs/deployment.md) | Cloud Run deployment guide |
+| [Troubleshooting](./docs/troubleshooting.md) | Common issues and solutions |
+| [Roadmap](./ROADMAP.md) | Pending features and improvements |
 
 ---
 
-## 🔑 Características Principales
+## Key Features
 
 <table>
 <tr>
 <td align="center" width="33%">
 
-### 🤖 RAG con IA
-Gemini 2.0 Flash con File Search recupera contexto relevante de 16 documentos de préstamos indexados
+### AI-Powered RAG
+Gemini 3 Flash with File Search retrieves relevant context from 16 indexed loan documents
 
 </td>
 <td align="center" width="33%">
 
-### 📄 Sistema de Citas
-Cada respuesta incluye referencias clicables a documentos fuente con números de página
+### Citation System
+Every response includes clickable references to source documents with page numbers
 
 </td>
 <td align="center" width="33%">
 
-### 🔒 Acceso por Roles
-Tres roles (Rep, Manager, Admin) con permisos granulares para funcionalidades
+### Role-Based Access
+Three roles (Rep, Manager, Admin) with granular permissions for features
 
 </td>
 </tr>
@@ -154,79 +159,79 @@ Tres roles (Rep, Manager, Admin) con permisos granulares para funcionalidades
 
 ---
 
-## 🎯 Programas de Préstamo Cubiertos
+## Loan Programs Covered
 
-| Programa | Documentos Matrix | Guías |
+| Program | Matrix Documents | Guidelines |
 |:--------|:-----------------|:-----------|
-| **DSCR** | 1-4 Unidades, 5-8 Unidades | Accelerator DSCR |
-| **Full Doc** | Full Doc Matrix | Guías Accelerator |
-| **Alt Doc** | Alt Doc Matrix | Guías Activator |
-| **Ally** | Consumer No Ratio | Guías Ally |
-| **Super Jumbo** | Super Jumbo Matrix | Guías Super Jumbo |
-| **Foreign National** | FN Ambassador Matrix | Guías FN |
-| **ITIN** | ITIN Matrix | Guías ITIN |
+| **DSCR** | 1-4 Units, 5-8 Units | Accelerator DSCR |
+| **Full Doc** | Full Doc Matrix | Accelerator Guidelines |
+| **Alt Doc** | Alt Doc Matrix | Activator Guidelines |
+| **Ally** | Consumer No Ratio | Ally Guidelines |
+| **Super Jumbo** | Super Jumbo Matrix | Super Jumbo Guidelines |
+| **Foreign National** | FN Ambassador Matrix | FN Guidelines |
+| **ITIN** | ITIN Matrix | ITIN Guidelines |
 
 ---
 
-## 🛠 Stack Tecnológico
+## Technology Stack
 
 <table>
 <tr>
 <td width="50%">
 
 ### Frontend
-| Tecnología | Propósito |
+| Technology | Purpose |
 |------------|---------|
-| Next.js 14 | Framework React (App Router) |
-| TypeScript | Seguridad de tipos |
-| Tailwind CSS | Estilos |
-| Zustand | Gestión de estado |
-| Lucide Icons | Íconos UI |
+| Next.js 14 | React framework (App Router) |
+| TypeScript | Type safety |
+| Tailwind CSS | Styling |
+| Zustand | State management |
+| Lucide Icons | UI icons |
 
 </td>
 <td width="50%">
 
 ### Backend
-| Tecnología | Propósito |
+| Technology | Purpose |
 |------------|---------|
-| FastAPI | Framework web Python |
+| FastAPI | Python web framework |
 | Python 3.11 | Runtime |
-| SQLAlchemy | ORM Async |
-| Pydantic | Validación de datos |
-| google-genai | SDK de Gemini |
+| SQLAlchemy | Async ORM |
+| Pydantic | Data validation |
+| google-genai | Gemini SDK |
 
 </td>
 </tr>
 </table>
 
-### Infraestructura
-| Componente | Servicio | ID/URL |
+### Infrastructure
+| Component | Service | ID/URL |
 |-----------|---------|--------|
 | Frontend | Cloud Run | `champions-frontend-561975502517` |
 | Backend | Cloud Run | `champions-backend-561975502517` |
-| Base de Datos | Cloud SQL | PostgreSQL 14 |
-| IA/RAG | Gemini 2.0 Flash | File Search Store |
-| Secretos | Secret Manager | JWT, API keys |
+| Database | Cloud SQL | PostgreSQL 14 |
+| AI/RAG | Gemini 3 Flash | File Search Store |
+| Secrets | Secret Manager | JWT, API keys |
 
 ---
 
-## ⚙️ Operaciones Comunes
+## Common Operations
 
 <details>
-<summary><b>➕ Agregar Nuevo Documento de Préstamo</b></summary>
+<summary><b>Add New Loan Document</b></summary>
 
-1. Subir documento a Gemini File Search Store
-2. Actualizar `file_search_name_map.json` con mapeo ID → nombre:
+1. Upload document to Gemini File Search Store
+2. Update `file_search_name_map.json` with ID → name mapping:
    ```json
    {
-     "abc123xyz": "Nuevo_Nombre_Documento.pdf"
+     "abc123xyz": "New_Document_Name.pdf"
    }
    ```
-3. Redesplegar backend para cargar nuevo mapeo
+3. Redeploy backend to load new mapping
 </details>
 
 <details>
-<summary><b>🔐 Crear Usuario Admin</b></summary>
+<summary><b>Create Admin User</b></summary>
 
 ```bash
 cd backend
@@ -235,77 +240,104 @@ python scripts/create_admin.py admin@championsfunding.com
 </details>
 
 <details>
-<summary><b>🗄️ Ejecutar Migración de Base de Datos</b></summary>
+<summary><b>Run Database Migration</b></summary>
 
 ```bash
 cd backend
-python scripts/run_migration.py           # Aplicar migración
-python scripts/run_migration.py --verify  # Verificar estado
-python scripts/run_migration.py --rollback # Revertir si es necesario
+python scripts/run_migration.py           # Apply migration
+python scripts/run_migration.py --verify  # Verify status
+python scripts/run_migration.py --rollback # Rollback if needed
+```
+</details>
+
+<details>
+<summary><b>Run Locally with Docker</b></summary>
+
+```bash
+docker-compose up -d
+# Frontend: http://localhost:3002
+# Backend:  http://localhost:8082
+```
+</details>
+
+<details>
+<summary><b>Deploy to Production</b></summary>
+
+```bash
+# Backend
+cd backend && gcloud run deploy champions-backend --source . --region us-central1
+
+# Frontend
+cd frontend && gcloud run deploy champions-frontend --source . --region us-central1
 ```
 </details>
 
 ---
 
-## 📁 Estructura del Repositorio
+## Repository Structure
 
 ```
-📦 champions-loan-expert-v2-claude
-├── 📄 README.md
-├── 📄 CHANGELOG.md
-├── 📄 HOJA-DE-RUTA.md
-├── 📄 .env.example
+champions-loan-expert-v2-claude
+├── README.md
+├── CHANGELOG.md
+├── ROADMAP.md
+├── .env.example
 │
-├── 📂 docs/
-│   ├── 📖 arquitectura.md
-│   ├── 🔑 referencia-api.md
-│   ├── 📁 sistema-enrutamiento-archivos.md
-│   ├── ⚙️ configuracion.md
-│   └── 🔧 solucion-problemas.md
+├── docs/
+│   ├── architecture.md
+│   ├── frontend.md
+│   ├── backend.md
+│   ├── database.md
+│   ├── api-reference.md
+│   ├── file-routing-system.md
+│   ├── configuration.md
+│   ├── development.md
+│   ├── deployment.md
+│   └── troubleshooting.md
 │
-├── 📂 backend/
-│   ├── 📂 app/
-│   │   ├── 📂 api/              # Endpoints REST
-│   │   ├── 📂 db/               # Conexión a base de datos
-│   │   ├── 📂 models/           # SQLAlchemy + Pydantic
-│   │   ├── 📂 services/         # Lógica de negocio
+├── backend/
+│   ├── app/
+│   │   ├── api/              # REST endpoints
+│   │   ├── db/               # Database connection
+│   │   ├── models/           # SQLAlchemy + Pydantic
+│   │   ├── services/         # Business logic
 │   │   ├── config.py
 │   │   └── main.py
-│   ├── 📂 scripts/              # Utilidades admin
-│   ├── 📄 file_search_name_map.json
-│   └── 📄 Dockerfile
+│   ├── scripts/              # Admin utilities
+│   ├── file_search_name_map.json
+│   └── Dockerfile
 │
-├── 📂 frontend/
-│   ├── 📂 src/
-│   │   ├── 📂 app/              # Páginas (App Router)
-│   │   ├── 📂 components/       # Componentes React
-│   │   ├── 📂 lib/              # Cliente API, utilidades
-│   │   ├── 📂 store/            # Stores Zustand
-│   │   └── 📂 types/            # Definiciones TypeScript
-│   └── 📄 Dockerfile
+├── frontend/
+│   ├── src/
+│   │   ├── app/              # Pages (App Router)
+│   │   ├── components/       # React components
+│   │   ├── lib/              # API client, utilities
+│   │   ├── store/            # Zustand stores
+│   │   └── types/            # TypeScript definitions
+│   └── Dockerfile
 │
-└── 📂 infrastructure/           # Terraform (opcional)
+└── docker-compose.yml
 ```
 
 ---
 
-## 🔗 Enlaces Rápidos
+## Quick Links
 
 <table>
 <tr>
 <td align="center">
 <a href="https://champions-frontend-561975502517.us-central1.run.app">
-<img src="https://img.shields.io/badge/Abrir-Aplicación-4CAF50?style=for-the-badge" alt="App">
+<img src="https://img.shields.io/badge/Open-Application-4CAF50?style=for-the-badge" alt="App">
 </a>
 </td>
 <td align="center">
 <a href="https://champions-backend-561975502517.us-central1.run.app/docs">
-<img src="https://img.shields.io/badge/Ver-Docs_API-009688?style=for-the-badge" alt="API">
+<img src="https://img.shields.io/badge/View-API_Docs-009688?style=for-the-badge" alt="API">
 </a>
 </td>
 <td align="center">
-<a href="./HOJA-DE-RUTA.md">
-<img src="https://img.shields.io/badge/Ver-Hoja_de_Ruta-FF6D5A?style=for-the-badge" alt="Roadmap">
+<a href="./ROADMAP.md">
+<img src="https://img.shields.io/badge/View-Roadmap-FF6D5A?style=for-the-badge" alt="Roadmap">
 </a>
 </td>
 </tr>
@@ -313,34 +345,34 @@ python scripts/run_migration.py --rollback # Revertir si es necesario
 
 ---
 
-## 👥 Roles y Permisos
+## Roles & Permissions
 
-| Funcionalidad | Rep | Manager | Admin |
+| Feature | Rep | Manager | Admin |
 |---------|:---:|:-------:|:-----:|
-| Chat con IA | ✅ | ✅ | ✅ |
-| Ver conversaciones propias | ✅ | ✅ | ✅ |
-| Exportar conversaciones | ✅ | ✅ | ✅ |
-| Ver analytics del equipo | ❌ | ✅ | ✅ |
-| Ver todas las conversaciones | ❌ | ✅ | ✅ |
-| Gestionar usuarios | ❌ | ❌ | ✅ |
-| Eliminar conversaciones | ❌ | ❌ | ✅ |
-| Cambiar roles de usuario | ❌ | ❌ | ✅ |
-| Invitar nuevos usuarios | ❌ | ❌ | 🔜 |
+| Chat with AI | ✅ | ✅ | ✅ |
+| View own conversations | ✅ | ✅ | ✅ |
+| Export conversations | ✅ | ✅ | ✅ |
+| View team analytics | ❌ | ✅ | ✅ |
+| View all conversations | ❌ | ✅ | ✅ |
+| Manage users | ❌ | ❌ | ✅ |
+| Delete conversations | ❌ | ❌ | ✅ |
+| Change user roles | ❌ | ❌ | ✅ |
+| Invite new users | ❌ | ❌ | Coming Soon |
 
 ---
 
-## 📊 Versiones Actuales
+## Current Versions
 
-| Componente | Versión | Última Actualización |
+| Component | Version | Last Updated |
 |-----------|---------|--------------|
-| Backend | v2.5.0 | 2025-01-27 |
-| Frontend | v2.5.0 | 2025-01-27 |
+| Backend | v2.5.1 | 2025-02 |
+| Frontend | v2.5.1 | 2025-02 |
 
-Ver [CHANGELOG.md](./CHANGELOG.md) para notas de versión detalladas.
+See [CHANGELOG.md](./CHANGELOG.md) for detailed release notes.
 
 ---
 
 <p align="center">
-  <sub>Construido con ❤️ por nuDesk LLC</sub><br>
-  <sub>Propietario — Champions Funding</sub>
+  <sub>Built with care by nuDesk LLC</sub><br>
+  <sub>Proprietary — Champions Funding</sub>
 </p>
